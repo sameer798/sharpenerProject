@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <div class="containeer">
+      <form action="" id="userDetails">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="username"><br>
+        <label for="email">email</label>
+        <input type="email" name="userEmail"><br>
+        <label for="phone">phone no</label>
+        <input type="tel" name="phoneNumber"><br>
+        <button>Submit</button>
+      </form>
+    </div>
+    <ul id="listOfItems"></ul>
+    <script>
+      const form = document.getElementById('userDetails');
+      
+      
+      form.addEventListener('submit', onSubmit);
+      function onSubmit(e){
+        e.preventDefault();
+        const name = e.target.username.value;
+        const email = e.target.userEmail.value;
+        const phoneNumber = e.target.phoneNumber.value;
+        const obj = {
+          name,
+          email,
+          phoneNumber
+        }
+        localStorage.setItem(obj.email, JSON.stringify(obj));
+        var parentEl = document.getElementById('listOfItems');
+        const li = document.createElement('li');
+        const delBtn = document.createElement('button');
+      const delBtnText = document.createTextNode('delete');
+      delBtn.appendChild(delBtnText);
+        li.textContent = `${obj.name} - ${obj.email} - ${obj.phoneNumber}`;
+        li.appendChild(delBtn);
+        parentEl.appendChild(li);
+        delBtn.onclick = ()=>{
+          localStorage.removeItem(obj.email);
+          parentEl.removeChild(li);
+        }
+        
+        
+      }
+      // delBtn.addEventListener('click', removeItem);
+      // function removeItem(e){
+      //   const delParentEl = document.getElementById('')
+      //   parentEl.remove();
+      // }
+      
+    </script>
+</body>
+</html>
